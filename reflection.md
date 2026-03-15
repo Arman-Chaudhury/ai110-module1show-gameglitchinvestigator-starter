@@ -30,9 +30,9 @@ When informinng claude about the hint problem, it fixed one bug, but when runnin
 When I ran the app again, the problem stopped occuring no matter what input I put.
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
-  
+  Claude created a pytest to verify both hint bugs were actually fixed. Running all 16 tests with pytest showed me that the logic in check_guess was broken in two independent ways — one corrupted the direction of comparison, and the other corrupted the message displayed — meaning even after fixing one bug, the hints were still wrong until both were resolved.
 - Did AI help you design or understand any tests? How?
-
+When creating pytests, Claude would give brief descriptions on what the pytests was. For the previous question, I asked it to describe the pytest it created and what is showed me about the code and it explained it.
 ---
 
 ## 4. What did you learn about Streamlit and state?

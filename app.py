@@ -34,6 +34,7 @@ def check_guess(guess, secret):
         return "Win", "🎉 Correct!"
 
     try:
+        #Fix: Remove incorrect messages using Claude Agent 
         if guess > secret:
             return "Too High", "📉 Go LOWER!"
         else:
