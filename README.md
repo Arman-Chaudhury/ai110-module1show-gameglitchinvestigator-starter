@@ -25,13 +25,23 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+Describe the game's purpose:
+
+Glitchy Guesser is a number guessing game where the player tries to guess a secret number within a limited number of attempts. The game gives hints after each guess (too high / too low) and tracks your score, rewarding faster wins.
+
+Detail which bugs you found:
+
+Hints were backwards — regardless of the guess, the game always told you to go higher or lower incorrectly (e.g., guessing 1 still said "Go Lower").
+New Game was broken — after losing, clicking "New Game" showed the game-over message instead of resetting, because status was never reset to "playing".
+Guess history stopped updating — (related to the state/rerun issues with the game being stuck in a non-playing status).
+Explain what fixes you applied:
+
+Fixed check_guess — corrected the comparison logic and the swapped hint messages so "Too High" returns "Go LOWER" and "Too Low" returns "Go HIGHER".
+Fixed New Game reset — added st.session_state.status = "playing" when the New Game button is clicked so the game properly resets.
+Stabilized the secret number — used if "secret" not in st.session_state to only generate a new secret once, preventing it from regenerating on every Streamlit rerun.
 
 ## 📸 Demo
-
-- [ ] [Insert a screenshot of your fixed, winning game here]
+![alt text](image-1.png)
 
 ## 🚀 Stretch Features
 

@@ -38,14 +38,23 @@ When creating pytests, Claude would give brief descriptions on what the pytests 
 ## 4. What did you learn about Streamlit and state?
 
 - In your own words, explain why the secret number kept changing in the original app.
+Every time someone interacts with the page, the enitre python script runs again. In the original app, secret number was generated with random.randint() call at the top level so every rerun produced a brand new random numbber, making it impossible to guess consistently
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+Imagine every button click causes Streamlit to restart your script from line 1. All your local variables get wiped out and recreated fresh. st.session_state is like a sticky notepad that survives those restarts — anything you write to it stays there across reruns. Without it, your app has amnesia after every click.
 - What change did you make that finally gave the game a stable secret number?
+The fix was wrapping the secret generation in a check before assigning it — seen at app.py:93-94:
 
+if "secret" not in st.session_state:
+    st.session_state.secret = random.randint(low, high)
+This means: "only pick a new secret if there isn't one already stored." On the first run it generates one and saves it to session state; on every subsequent rerun it skips that block and reuses the same number.
 ---
 
 ## 5. Looking ahead: your developer habits
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+  Having it create pytest for every change made is something I would implement as it makes sure the changes made actually work
 - What is one thing you would do differently next time you work with AI on a coding task?
+Next time I work with claude, I will be sure to implement to hastags so that claude can see the relationship between the UI and logicc files.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+This project allowed me to see that although AI may be right, it may not give you the full truth or solution to a problem but rather a fix to part of the problem
